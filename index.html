@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AlmaPaid Demo con Datos y Notificaciones</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="screen">
+
+      <!-- Home -->
+      <section id="home" class="page active">
+        <div class="home-center">
+          <img src="logo.png" alt="Alma Logo" class="logo">
+          <h1>Bienvenido a AlmaPaid</h1>
+          <p>Selecciona una sección abajo.</p>
+        </div>
+      </section>
+
+      <!-- Estudiantes -->
+      <section id="students" class="page">
+        <header>
+          <button class="back" onclick="goHome()">←</button>
+          <h2>Estudiantes</h2>
+        </header>
+        <div class="list" id="studentsList">
+          <!-- Se llena por JS -->
+        </div>
+      </section>
+
+      <!-- Talleres -->
+      <section id="workshops" class="page">
+        <header>
+          <button class="back" onclick="goHome()">←</button>
+          <h2>Talleres</h2>
+        </header>
+        <div id="workshopList">
+          <!-- Se llena por JS -->
+        </div>
+      </section>
+
+      <!-- Inscripciones -->
+      <section id="registrations" class="page">
+        <header>
+          <button class="back" onclick="goHome()">←</button>
+          <h2>Nueva Inscripción</h2>
+        </header>
+        <form onsubmit="processRegistration(); return false;">
+          <label>Nombre completo:</label>
+          <input type="text" id="regName" placeholder="Nombre y apellido" required>
+          <label>Teléfono:</label>
+          <input type="tel" id="regPhone" placeholder="+56 9 1234 5678" required>
+          <label>Taller:</label>
+          <select id="regWorkshopSelect" required>
+            <!-- Se llena por JS -->
+          </select>
+          <button class="big">Inscribir</button>
+        </form>
+      </section>
+
+      <!-- Confirmación Inscripción -->
+      <section id="registrationConfirmation" class="page">
+        <div class="confirm">
+          <div class="check">✔︎</div>
+          <h2>Inscripción realizada con éxito</h2>
+          <table id="inscrTable"></table>
+          <button class="big" onclick="goHome()">Aceptar</button>
+        </div>
+      </section>
+
+      <!-- Detalle Estudiante -->
+      <section id="studentDetail" class="page">
+        <header>
+          <button class="back" onclick="showSection('students')">←</button>
+          <h2>Estudiante</h2>
+        </header>
+        <div class="detail">
+          <h3 id="detailName">Nombre</h3>
+          <h4>Talleres inscritos</h4>
+          <ul id="detailWorkshops"></ul>
+          <div class="total">
+            <span>Total a pagar</span>
+            <strong id="detailTotal">$0</strong>
+          </div>
+          <button class="big" onclick="showSection('payments')">Pagar</button>
+        </div>
+      </section>
+
+      <!-- Pago -->
+      <section id="payments" class="page">
+        <header>
+          <button class="back" onclick="goHome()">←</button>
+          <h2>Pagar Taller</h2>
+        </header>
+        <form onsubmit="processPayment(); return false;">
+          <label>Alumno:</label>
+          <select id="payStudentSelect"></select>
+          <label>Taller:</label>
+          <select id="payWorkshopSelect"></select>
+          <label>Monto transferido:</label>
+          <input type="number" id="payAmount" placeholder="Ingrese monto" required>
+          <button class="big">Pagar</button>
+        </form>
+        <!-- Botones de notificaciones simuladas -->
+        <div class="notifications">
+          <button class="big" onclick="notifyFeeIncrease()">
+            Notificar aumento de aranceles
+          </button>
+          <button class="big" onclick="notifyPaymentReminders()">
+            Recordatorio de falta de pago
+          </button>
+        </div>
+      </section>
+
+      <!-- Confirmación Pago -->
+      <section id="confirmation" class="page">
+        <div class="confirm">
+          <div class="check">✔︎</div>
+          <h2>Pago realizado</h2>
+          <table id="confirmTable"></table>
+          <button class="big" onclick="goHome()">Aceptar</button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <button onclick="showSection('home')">Inicio</button>
+      <button onclick="showSection('students')">Estudiantes</button>
+      <button onclick="showSection('workshops')">Talleres</button>
+      <button onclick="showSection('registrations')">Inscripciones</button>
+      <button onclick="showSection('payments')">Pagos</button>
+    </nav>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
